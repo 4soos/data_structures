@@ -67,18 +67,18 @@ class Solution:
         dfs(root)
         return res
 
-    def inorder_traversal_iteration(self, root: TreeNode = None) -> List[int]:
+    def level_order(self, root: TreeNode = None) -> List[List[int]]:
         if not root: return []
 
-        stack, res = [root], []
-        while stack:
-            node = stack.pop()
-            if node:
-                if node.right:
-                    res.append(node.right)
-                res.append(node.val)
+        queue, res = [root], []
+        while queue:
+            res.append([node.val for node in queue])
+            ll = []
+            for node in queue:
                 if node.left:
-                    res.append(node.right)
+                    ll.append(node.left)
+                if node.right:
+                    ll.append(node.right)
+            queue = ll
 
         return res
-    
